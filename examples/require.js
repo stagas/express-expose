@@ -19,7 +19,7 @@ app.set('boot', new Date);
 // tell express-expose that we want to
 // use the commonjs module system, and
 // not namespacing
-app.exposeRequire();
+app.exposeRequire(require);
 
 // we can expose arrays as modules if we wish
 app.expose([function(){ return 'yay'; }], 'array');
@@ -31,7 +31,7 @@ app.expose({ add: function(a, b){ return a + b; }}, 'utils');
 
 // by default the module name be the basename, so
 // "color" in this case, however we explicitly pass "utils/color"
-app.exposeModule(__dirname + '/color', 'utils/color');
+app.exposeModule('./color', 'utils/color');
 
 app.get('/', function(req, res){
   res.render('index', { layout: false });
